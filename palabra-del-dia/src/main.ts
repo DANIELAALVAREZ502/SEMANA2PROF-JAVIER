@@ -99,7 +99,7 @@ function renderizar(): void {
 
   if (juego.estado === 'jugando') {
     app.innerHTML = `
-      <main class="contenedor">
+      <main class="contenedor pantalla-juego">
         <header class="encabezado">
           <p class="marca">PALABRA DEL DÍA</p>
           <h1>Descubrí la palabra</h1>
@@ -138,7 +138,9 @@ function renderizar(): void {
         mensaje = 'No se pudo comprobar el intento.'
       }
       renderizar()
-      app.querySelector<HTMLInputElement>('#entrada-palabra')?.focus()
+      const entrada = app.querySelector<HTMLInputElement>('#entrada-palabra')
+      entrada?.focus({ preventScroll: true })
+      entrada?.scrollIntoView({ block: 'nearest' })
     })
     return
   }

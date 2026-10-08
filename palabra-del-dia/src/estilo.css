@@ -2,6 +2,7 @@
   font-family: system-ui, "Segoe UI", sans-serif;
   color: #f9fafb;
   background: #111827;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,10 +16,12 @@
 }
 
 body {
-  min-width: 320px;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
   margin: 0;
   background: #111827;
+  overflow-x: clip;
 }
 
 button,
@@ -27,19 +30,24 @@ input {
 }
 
 button {
+  min-width: 44px;
   min-height: 48px;
   touch-action: manipulation;
 }
 
 #app {
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow-x: clip;
 }
 
 .contenedor {
-  width: min(100% - 32px, 560px);
-  min-height: 100vh;
+  width: min(calc(100% - 24px), 560px);
+  min-height: 100svh;
+  min-height: 100dvh;
   margin: 0 auto;
-  padding: 32px 0;
+  padding: max(24px, env(safe-area-inset-top)) 0 max(24px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,19 +100,22 @@ h1 {
 }
 
 .tablero {
+  width: min(100%, 320px);
   display: grid;
   gap: 8px;
 }
 
 .fila {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, minmax(48px, 58px));
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
   gap: 8px;
 }
 
 .casilla {
-  width: 58px;
-  height: 58px;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
   border: 2px solid #64748b;
@@ -135,6 +146,7 @@ h1 {
 
 .formulario {
   width: min(100%, 420px);
+  min-width: 0;
   display: grid;
   gap: 10px;
   text-align: left;
@@ -153,7 +165,7 @@ h1 {
 
 .controles input {
   width: 100%;
-  min-width: 0;
+  min-width: 44px;
   min-height: 48px;
   border: 2px solid #94a3b8;
   border-radius: 8px;
@@ -213,6 +225,11 @@ h1 {
   gap: 24px;
 }
 
+.pantalla-juego {
+  justify-content: flex-start;
+  gap: 16px;
+}
+
 .palabra-final {
   color: #e5e7eb;
 }
@@ -223,23 +240,19 @@ h1 {
 }
 
 @media (max-width: 390px) {
-  .contenedor {
-    width: min(100% - 24px, 560px);
-    padding: 24px 0;
-    gap: 16px;
+  .pantalla-juego {
+    gap: 12px;
   }
 
-  .fila {
-    grid-template-columns: repeat(5, minmax(44px, 52px));
+  .pantalla-juego .fila {
     gap: 6px;
-  }
-
-  .casilla {
-    width: 52px;
-    height: 52px;
   }
 
   .controles {
     grid-template-columns: 1fr;
+  }
+
+  .controles .boton {
+    width: 100%;
   }
 }
